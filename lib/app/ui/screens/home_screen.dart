@@ -123,9 +123,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               },
                                                             );
                                                           },
-                                                        ).then((value) =>
-                                                            focusNode
-                                                                .requestFocus());
+                                                        ).then((value) {
+                                                          focusNode
+                                                              .requestFocus();
+
+                                                          textStore.loadList();
+                                                        });
                                                       },
                                                       icon: const Icon(
                                                         Icons.edit,
@@ -145,6 +148,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           onConfirm: () {
                                                             textStore
                                                                 .deleteText(e);
+                                                            textStore
+                                                                .loadList();
                                                           },
                                                         );
                                                       },

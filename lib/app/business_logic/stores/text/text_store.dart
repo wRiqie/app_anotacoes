@@ -32,13 +32,11 @@ abstract class _TextStore with Store {
     var index = texts.indexOf(oldText);
     texts.setAll(index, [newText]);
     _preferencesHelper.setStringList(Constants.textsList, texts);
-    loadList();
   }
 
   @action
   Future deleteText(String text) async {
     texts.removeWhere((e) => e == text);
     _preferencesHelper.setStringList(Constants.textsList, texts);
-    loadList();
   }
 }
