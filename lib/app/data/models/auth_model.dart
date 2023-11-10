@@ -1,19 +1,19 @@
 class AuthModel {
-  final String? email;
+  final String? user;
   final String? password;
 
   AuthModel({
-    this.email,
+    this.user,
     this.password,
   });
 
   Map<String, dynamic> toSignin() {
-    return {'email': email, 'passWord': password};
+    return {'user': user, 'password': password};
   }
 
   factory AuthModel.fromMap(Map<String, dynamic> map) {
     return AuthModel(
-      email: map['email'],
+      user: map['user'],
       password: map['password'],
     );
   }

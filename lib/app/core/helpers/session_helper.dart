@@ -8,7 +8,7 @@ class SessionHelper {
   final PreferencesHelper _preferencesHelper;
   SessionModel? _actualSession;
 
-  SessionHelper(this._preferencesHelper, this._actualSession);
+  SessionHelper(this._preferencesHelper);
 
   Future<void> init() async {
     final sessionString = _preferencesHelper.getString(Constants.actualSession);
@@ -34,4 +34,3 @@ class SessionHelper {
     _actualSession = null;
   }
 }
-//

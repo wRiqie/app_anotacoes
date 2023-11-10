@@ -7,7 +7,8 @@ class AuthDataSourceMockImp implements AuthDataSource {
   @override
   Future<SessionModel> signIn(AuthModel auth) {
     return Future.delayed(const Duration(seconds: 3), () {
-      return _mockSession.copyWith(email: auth.email);
+      return _mockSession.copyWith(email: auth.user);
+      // throw ErrorModel('Email e/ou senha incorretos');
     });
   }
 

@@ -1,4 +1,7 @@
+import 'package:app_anotacoes/app/business_logic/stores/auth/auth_store.dart';
+import 'package:app_anotacoes/app/business_logic/stores/obscure/obscure_store.dart';
 import 'package:app_anotacoes/app/core/helpers/preferences_helper.dart';
+import 'package:app_anotacoes/app/core/helpers/session_helper.dart';
 import 'package:app_anotacoes/app/data/repositories/auth_repository.dart';
 import 'package:get_it/get_it.dart';
 
@@ -13,6 +16,7 @@ class Inject {
 
     // Helpers
     getIt.registerLazySingleton<PreferencesHelper>(() => PreferencesHelper());
+    getIt.registerLazySingleton<SessionHelper>(() => SessionHelper(getIt()));
 
     // Datasources
 
@@ -23,5 +27,9 @@ class Inject {
 
     // Repositories
     getIt.registerLazySingleton<AuthRepository>(() => AuthRepository(getIt()));
+
+    // Stores
+    getIt.registerLazySingleton<AuthStore>(() => AuthStore(getIt(), getIt()));
+    getIt.registerLazySingleton<ObscureStore>(() => ObscureStore());
   }
 }

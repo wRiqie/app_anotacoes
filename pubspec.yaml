@@ -7,12 +7,14 @@ environment:
   sdk: '>=3.1.2 <4.0.0'
 
 dependencies:
+  another_flushbar: ^1.12.30
   flutter:
     sdk: flutter
   flutter_mobx: ^2.1.1
   get_it: ^7.6.4
   mobx: ^2.2.1
   shared_preferences: ^2.2.2
+  url_launcher: ^6.2.1
 
 dev_dependencies:
   flutter_test:
