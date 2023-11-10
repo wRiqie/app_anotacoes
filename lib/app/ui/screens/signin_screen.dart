@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -21,10 +20,6 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> with ValidatorsMixin {
-  // #1c4d65 cima
-  // #32918a baixo
-  // #44bd6e botao
-  // #1d2530 icons
   final authStore = GetIt.I<AuthStore>();
   final obscureStore = GetIt.I<ObscureStore>();
 
