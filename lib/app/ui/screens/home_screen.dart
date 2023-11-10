@@ -59,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [
               IconButton(
                 onPressed: () {
+                  focusNode.unfocus();
                   GetIt.I<SessionHelper>().signOut().then(
                         (_) => Navigator.pushReplacementNamed(
                             context, AppRoutes.signin),
