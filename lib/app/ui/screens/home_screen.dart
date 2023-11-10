@@ -23,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final textStore = GetIt.I<TextStore>();
   final dialogHelper = GetIt.I<DialogHelper>();
   final textCtrl = TextEditingController();
-  final editTextCtrl = TextEditingController();
 
   final focusNode = FocusNode();
 
@@ -41,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     textCtrl.dispose();
-    editTextCtrl.dispose();
     focusNode.dispose();
     super.dispose();
   }
@@ -109,22 +107,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   children: [
                                                     IconButton(
                                                       onPressed: () {
-                                                        setState(() {
-                                                          editTextCtrl.text = e;
-                                                        });
                                                         showModalBottomSheet(
                                                           context: context,
                                                           isScrollControlled:
                                                               true,
                                                           builder: (context) {
                                                             return EditBottomSheetWidget(
-                                                              ctrl:
-                                                                  editTextCtrl,
-                                                              onEdit: () {
+                                                              initialText: e,
+                                                              onEdit: (value) {
                                                                 textStore.editText(
                                                                     e,
-                                                                    editTextCtrl
-                                                                        .text
+                                                                    value
                                                                         .trim());
                                                               },
                                                             );
@@ -200,6 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 message:
                                     'Por favor digite um texto para salvá-lo');
                             focusNode.requestFocus();
+
                             return;
                           }
 

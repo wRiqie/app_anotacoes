@@ -1,14 +1,37 @@
+import 'package:app_anotacoes/app/core/snackbars.dart';
 import 'package:flutter/material.dart';
 
-class EditBottomSheetWidget extends StatelessWidget {
-  final TextEditingController ctrl;
-  final VoidCallback onEdit;
+class EditBottomSheetWidget extends StatefulWidget {
+  final String initialText;
+  final Function(String value) onEdit;
 
   const EditBottomSheetWidget({
     Key? key,
-    required this.ctrl,
+    required this.initialText,
     required this.onEdit,
   }) : super(key: key);
+
+  @override
+  State<EditBottomSheetWidget> createState() => _EditBottomSheetWidgetState();
+}
+
+class _EditBottomSheetWidgetState extends State<EditBottomSheetWidget> {
+  final editFocusNode = FocusNode();
+  final editTextCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    editFocusNode.requestFocus();
+    editTextCtrl.text = widget.initialText;
+  }
+
+  @override
+  void dispose() {
+    editTextCtrl.dispose();
+    editFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +46,12 @@ class EditBottomSheetWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextField(
-              controller: ctrl,
+              focusNode: editFocusNode,
+              controller: editTextCtrl,
               decoration: const InputDecoration(hintText: 'Digite seu texto'),
+              onSubmitted: (value) {
+                _save(context);
+              },
             ),
             const SizedBox(
               height: 30,
@@ -34,8 +61,7 @@ class EditBottomSheetWidget extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  onEdit();
-                  Navigator.pop(context);
+                  _save(context);
                 },
                 style: ButtonStyle(
                   shape: MaterialStatePropertyAll(
@@ -60,5 +86,17 @@ class EditBottomSheetWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _save(BuildContext context) {
+    if (editTextCtrl.text.trim().isEmpty) {
+      AlertSnackbar(context,
+          message: 'Por favor digite um texto para salvá-lo');
+      editFocusNode.requestFocus();
+      return;
+    }
+
+    widget.onEdit(editTextCtrl.text);
+    Navigator.pop(context);
   }
 }
