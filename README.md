@@ -1,6 +1,6 @@
 # App-Anotações
 
-App com login mockado e bloco de anotações, utilizando mobx
+App com login via mock e bloco de anotações com shared preferences, utilizando mobx
 
 ## Índice
 
